@@ -1,14 +1,13 @@
 <template>
-
   <section class="app-main">
-    <div style="height:100%;">
+     <div style="height:100%;">
         <div v-loading="loading" element-loading-text="数据加载中..." element-loading-background="rgba(0, 0, 0, 0.8)" style="height: 100%;">
+            <v-head ref="head"></v-head>
+            <div style="padding-top: 20px" ></div>
+            <router-view v-if='routerShow' class="main"  @addGroup='change'></router-view>
         </div>
+        <add-group @close="addGroups" v-if="addGroupShow" @success='addSuccess' :show='addGroupShow'></add-group>
     </div>
-    <transition name="fade" mode="out-in">
-      <!-- <router-view :key="key"></router-view> -->
-      <router-view></router-view>
-    </transition>
   </section>
 </template>
 <script>
@@ -38,7 +37,7 @@
             }
         },
         mounted: function () {
-          console.log('123')
+          
             this.$nextTick(function () {
                 this.GetgroupList();
             })
@@ -107,16 +106,7 @@
         }
     }
 </script>
-// <script>
-// export default {
-//   name: 'AppMain',
-//   computed: {
-//     // key() {
-//     //   return this.$route.name !== undefined ? this.$route.name + +new Date() : this.$route + +new Date()
-//     // }
-//   }
-// }
-// </script>
+
 
 <style scoped>
 .app-main {
