@@ -1,22 +1,122 @@
 <template>
+
   <section class="app-main">
+    <div style="height:100%;">
+        <div v-loading="loading" element-loading-text="数据加载中..." element-loading-background="rgba(0, 0, 0, 0.8)" style="height: 100%;">
+        </div>
+    </div>
     <transition name="fade" mode="out-in">
       <!-- <router-view :key="key"></router-view> -->
       <router-view></router-view>
     </transition>
   </section>
 </template>
-
 <script>
-export default {
-  name: 'AppMain',
-  computed: {
-    // key() {
-    //   return this.$route.name !== undefined ? this.$route.name + +new Date() : this.$route + +new Date()
-    // }
-  }
-}
+    // import headers from './headers'
+    import addGroup from "@/components/addGroup"
+    import { getGroupList,getEncryptType } from "@/api/api"
+    import '@/assets/css/layout.css'
+    import '@/assets/css/public.css'
+    import url from '@/api/url'
+    import router from '@/router'
+    import constant from '@/util/constant'
+    import {message} from '@/util/util'
+
+    export default {
+        name: 'AppMain',
+        components:{
+            // 'v-head': headers,
+            "add-group": addGroup
+        },
+        data: function () {
+            return {
+                loading: false,
+                addGroupShow: false,
+                groupList: [],
+                groupId: null,
+                routerShow: false,
+            }
+        },
+        mounted: function () {
+          console.log('123')
+            this.$nextTick(function () {
+                this.GetgroupList();
+            })
+        },
+        methods: {
+            change: function () {
+                this.$refs.head.getGroupData();
+            },
+            GetgroupList: function(){
+                let data = {};
+                getGroupList(data).then(res => {
+                    if(res.data.code === 0){
+                        this.routerShow = true
+                        if(res.data.data.length){
+                            this.groupList = res.data.data
+                            if(!localStorage.getItem("groupId")){
+                                this.groupId = res.data.data[0].groupId;
+                                localStorage.setItem("groupId",this.groupId);
+                            }
+                            localStorage.setItem("groupList",JSON.stringify(this.groupList))
+                            this.getEncrypt();
+                            this.change();
+                            if(this.$route.query.pkHash){
+                                router.push({
+                                    name: this.$route.query.path,
+                                    query: {
+                                        pkHash: this.$route.query.pkHash
+                                    }
+                                })
+                            }else if(this.$route.query.blockHash){
+                                router.push({
+                                    name: this.$route.query.path,
+                                    query: {
+                                        blockHash: this.$route.query.blockHash
+                                    }
+                                })
+                            }else{
+                                router.push({
+                                    name: this.$route.query.path,
+                                })
+                            }
+                            
+                        }else{
+                            router.push({
+                                name: "groupConfig"
+                            })
+                        }
+                    }else{
+                        message(res.data.message,'error')
+                    }
+                }).catch(err => {
+                    message(constant.ERROR,'error');
+                })
+            },
+            getEncrypt: function(){
+                getEncryptType(localStorage.getItem("groupId")).then(res => {
+                    if(res.data.code === 0){
+                        localStorage.setItem("encryptionId",res.data.data)
+                    }else{
+                        message(errorcode[res.data.code].cn,'error')
+                    }
+                }).catch(err => {
+                    message(constant.ERROR,'error');
+                })
+            },
+        }
+    }
 </script>
+// <script>
+// export default {
+//   name: 'AppMain',
+//   computed: {
+//     // key() {
+//     //   return this.$route.name !== undefined ? this.$route.name + +new Date() : this.$route + +new Date()
+//     // }
+//   }
+// }
+// </script>
 
 <style scoped>
 .app-main {
