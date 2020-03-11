@@ -7,7 +7,6 @@ const tokens = {
     token: 'editor-token'
   }
 }
-
 const users = {
   'admin-token': {
     roles: ['admin'],
@@ -31,7 +30,7 @@ export default [
     response: config => {
       const { username } = config.body
       const token = tokens[username]
-
+console.log('vue-admin/user/login')
       // mock error
       if (!token) {
         return {

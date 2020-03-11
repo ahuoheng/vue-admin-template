@@ -14,7 +14,9 @@ import store from './store'
 
 import '@/icons' // icon
 import '@/permission' // permission control
-import '../mock'
+const { mockXHR } = require('../mock')
+mockXHR()
+
 Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = false

@@ -2,8 +2,8 @@
   <section class="app-main">
      <div style="height:100%;">
         <div v-loading="loading" element-loading-text="数据加载中..." element-loading-background="rgba(0, 0, 0, 0.8)" style="height: 100%;">
-            <v-head ref="head"></v-head>
-            <div style="padding-top: 20px" ></div>
+            <!-- <v-head ref="head"></v-head> -->
+            <div style="padding-top: 0px" ></div>
             <router-view v-if='routerShow' class="main"  @addGroup='change'></router-view>
         </div>
         <add-group @close="addGroups" v-if="addGroupShow" @success='addSuccess' :show='addGroupShow'></add-group>
