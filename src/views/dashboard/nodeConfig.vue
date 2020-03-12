@@ -138,7 +138,7 @@
                     if(res.data.code === 0){
                         if(res.data.data && res.data.data.length > 0){
                             this.configList = res.data.data;
-                            this.getEncrypt();
+                            // this.getEncrypt();
                         }else{
                             this.configList = []
                             // message('无可用节点，请在节点配置添加节点！','warning')

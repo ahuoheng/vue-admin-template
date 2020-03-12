@@ -75,6 +75,33 @@ export const constantRouterMap = [
     ]
   },
   {
+    path: '/browser',
+    component: Layout,
+    redirect: '/browser/table',
+    name: 'setting',
+    meta: { title: '配置', icon: 'example' },
+    children: [
+      {
+        path: 'group',
+        name: 'group',
+        component: () => import('@/views/dashboard/group'),
+        meta: { title: '群组配置', icon: 'table' }
+      },
+      {
+        path: 'nodeConfig',
+        name: 'nodeConfig',
+        component: () => import('@/views/dashboard/nodeConfig'),
+        meta: { title: '节点配置', icon: 'tree' }
+      },
+      // {
+      //   path: 'contractConfig',
+      //   name: 'contractConfig',
+      //   component: () => import('@/views/dashboard/contractConfig'),
+      //   meta: { title: '合约配置', icon: 'tree' }
+      // }
+    ]
+  },
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
