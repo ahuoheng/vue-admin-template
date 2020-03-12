@@ -58,7 +58,7 @@
                                 localStorage.setItem("groupId",this.groupId);
                             }
                             localStorage.setItem("groupList",JSON.stringify(this.groupList))
-                            this.getEncrypt();
+                            // this.getEncrypt(); 无效请求404
                             this.change();
                             if(this.$route.query.pkHash){
                                 router.push({

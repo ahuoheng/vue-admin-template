@@ -36,7 +36,44 @@ export const constantRouterMap = [
       component: () => import('@/views/dashboard/home')
     }]
   },
-
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/transaction',
+    name: 'transaction',
+    hidden: true,
+    children: [{
+      path: 'transaction',
+      component: () => import('@/views/dashboard/transaction')
+    }]
+  },
+  {
+    path: '/browser',
+    component: Layout,
+    redirect: '/browser/table',
+    name: 'browser',
+    meta: { title: '区块链信息', icon: 'example' },
+    children: [
+      {
+        path: 'home',
+        name: 'Home',
+        component: () => import('@/views/dashboard/home'),
+        meta: { title: '概况', icon: 'table' }
+      },
+      {
+        path: 'block',
+        name: 'block',
+        component: () => import('@/views/dashboard/block'),
+        meta: { title: '区块', icon: 'tree' }
+      },
+      {
+        path: 'transaction',
+        name: 'transaction',
+        component: () => import('@/views/dashboard/transaction'),
+        meta: { title: '交易', icon: 'tree' }
+      }
+    ]
+  },
   {
     path: '/example',
     component: Layout,

@@ -1,7 +1,7 @@
 <template>
     <div class="search-main" style="height: auto;">
         <div class="container">
-           <v-nav :hrTitle="btitle" :hrcontent="btitle" :route="'block'"></v-nav>
+           <!-- <v-nav :hrTitle="btitle" :hrcontent="btitle" :route="'block'"></v-nav> -->
             <div class="search-nav">
                 <div class="hashInput">
                     <el-input placeholder="请输入区块哈希或块高" v-model="searchKeyValue" class="input-with-select">

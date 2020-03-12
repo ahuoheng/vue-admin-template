@@ -2,7 +2,7 @@
     <div>
         <div class="search-main padding-bottom-0">
             <div class="container padding-bottom-0">
-                <v-nav :page='page' :hrTitle="'区块'" :navContent="blockName" :navSubtitle="'区块'" :hrcontent="'区块信息'" :route="'block'"></v-nav>
+                <!-- <v-nav :page='page' :hrTitle="'区块'" :navContent="blockName" :navSubtitle="'区块'" :hrcontent="'区块信息'" :route="'block'"></v-nav> -->
                 <div class="detail-content">
                    <div class="c-title">
                        <div>区块信息</div>
