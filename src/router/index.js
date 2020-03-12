@@ -37,17 +37,6 @@ export const constantRouterMap = [
     }]
   },
   {
-    path: '/',
-    component: Layout,
-    redirect: '/transaction',
-    name: 'transaction',
-    hidden: true,
-    children: [{
-      path: 'transaction',
-      component: () => import('@/views/dashboard/transaction')
-    }]
-  },
-  {
     path: '/browser',
     component: Layout,
     redirect: '/browser/table',
